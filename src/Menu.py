@@ -2,9 +2,11 @@ from src.Controller import SmartHomeSystem
 
 
 def temp_sensor_menu(room_t, device_t, controller_t: SmartHomeSystem):
+    last_data = controller_t.find_last_report(f'{room_t}/{device_t}')
     while True:
+        print("\nTemperature: {} - {}".format(last_data["data"], last_data["date"]))
         sensor_menu = {
-            "actions": "\nAvailable actions:\t",
+            "actions": "Available actions:\t",
             "s": "1.\tPress \"s\" to set temperature",
             "r": "2.\tPress \"r\" to return"
         }
@@ -16,6 +18,7 @@ def temp_sensor_menu(room_t, device_t, controller_t: SmartHomeSystem):
         elif selected_sensor_menu == "s":
             new_temperature = input("Set temperature:\t")
             controller_t.set_temperature(int(new_temperature), room_t, device_t)
+
 
 if __name__ == "__main__":
     controller = SmartHomeSystem()

@@ -28,7 +28,18 @@ class SmartHomeSystem:
     def __on_message(self, client, userdata, msg):
         now = datetime.now()
         message = json.loads(str(msg.payload.decode("utf-8", "ignore")))
-        print(message)
+        self.__reports = [{
+            "device": message["device"],
+            "date": now,
+            "data": message["data"]
+        }] + self.__reports
+        # print(message)
+
+    def find_last_report(self, device):
+        for index in range(len(self.__reports)):
+            if self.__reports[index]["device"] == device:
+                return self.__reports[index]
+        return {f'{device}': "Data not found"}
 
     def connected(self):
         return self.__connected
