@@ -17,7 +17,7 @@ class TemperatureSensor:
         self.__set_interval(self.send_temperature_report, 20)
 
     def __on_connect(self, client, userdata, flags, rc):
-        print(f'smart/{self.__path}')
+        # print(f'smart/{self.__path}')
         self.__client.subscribe([(f'smart/{self.__path}', 0)])
 
     def __on_message(self, client, userdata, msg):

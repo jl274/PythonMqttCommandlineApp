@@ -1,24 +1,5 @@
 from src.Controller import SmartHomeSystem
-
-
-def temp_sensor_menu(room_t, device_t, controller_t: SmartHomeSystem):
-    last_data = controller_t.find_last_report(f'{room_t}/{device_t}')
-    while True:
-        print("\nTemperature: {} - {}".format(last_data["data"], last_data["date"]))
-        sensor_menu = {
-            "actions": "Available actions:\t",
-            "s": "1.\tPress \"s\" to set temperature",
-            "r": "2.\tPress \"r\" to return"
-        }
-        for sensor_menu_option in sensor_menu.values():
-            print(sensor_menu_option)
-        selected_sensor_menu = input(f'{room_t}/{device_t}#\t')
-        if selected_sensor_menu == "r":
-            break
-        elif selected_sensor_menu == "s":
-            new_temperature = input("Set temperature:\t")
-            controller_t.set_temperature(int(new_temperature), room_t, device_t)
-
+from src.MenuElements.TempSensor import temp_sensor_menu
 
 if __name__ == "__main__":
     controller = SmartHomeSystem()
@@ -76,7 +57,7 @@ if __name__ == "__main__":
                             print(room_menu_option)
                         selected_room_menu_option = input(f'{selected_room}#\t')
 
-                        # setting new temperature
+                        # temperature menu
                         if selected_room_menu_option in devices_in_room:
                             temp_sensor_menu(selected_room, selected_room_menu_option, controller)
                         if selected_room_menu_option == "r":
@@ -92,7 +73,7 @@ if __name__ == "__main__":
                                 }
                                 for device in devices.values():
                                     print(device)
-                                selected_device = input("#\t")
+                                selected_device = input(f"{selected_room}#\t")
                                 if selected_device == "c":
                                     break
                                 elif selected_device == "1":
@@ -103,7 +84,8 @@ if __name__ == "__main__":
                                         if not is_added:
                                             print("Name already taken")
                                     break
-                                print("Invalid device")
+                                else:
+                                    print("Invalid device")
 
                         else:
                             print("Invalid option")
