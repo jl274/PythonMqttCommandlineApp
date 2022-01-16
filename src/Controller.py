@@ -1,6 +1,5 @@
 import paho.mqtt.client as mqtt
 import json
-import os
 from datetime import datetime
 
 
@@ -10,6 +9,7 @@ class SmartHomeSystem:
         self.__connected = False
         self.__client = mqtt.Client()
         self.__reports = []
+        self.__devices = {}
         self.__client.on_connect = self.__on_connect
         self.__client.on_message = self.__on_message
         print("***Connecting...***")
@@ -32,15 +32,8 @@ class SmartHomeSystem:
     def connected(self):
         return self.__connected
 
+    # def add_device(self, path):
+    #     self.__devices[path]
 
-if __name__ == "__main__":
-    controller = SmartHomeSystem()
-    menu = {0: "Smart home controller menu:", "q": "1.\t press q to quit"}
-    while controller.connected():
-        for option in menu.values():
-            print(option)
-        selected = input("#\t")
-        if selected == "q":
-            print("Goodbye")
-            break
-        print("Invalid option")
+
+
