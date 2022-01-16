@@ -2,7 +2,7 @@
 
 College related project aiming at creating fully adjustable smart home system based on mqtt.
 
-### Objects send through mqtt:
+### Objects send through mqtt to controller:
 ```python
 msg = {
     "device": "device name",
