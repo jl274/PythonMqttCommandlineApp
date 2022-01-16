@@ -35,7 +35,11 @@ class SmartHomeSystem:
 
     def add_device(self, name, room, device_type):
         device_types = {"temp_sensor": TemperatureSensor}
-        self.__devices[room][name] = device_types[device_type]
+        if name in self.__devices[room].keys():
+            return False
+        self.__devices[room][f'{name}'] = device_types[device_type]
+        TemperatureSensor(f'{room}/{name}')
+        return True
 
     def add_room(self, room):
         self.__devices[room] = {}
@@ -45,3 +49,22 @@ class SmartHomeSystem:
         for room in self.__devices.keys():
             rooms.append(room)
         return rooms
+
+    def get_room_devices(self, room):
+        devices = []
+        if room in self.__devices.keys():
+            for device in self.__devices[room]:
+                devices.append(device)
+        return devices
+
+    def set_temperature(self, temperature, room, name):
+        try:
+            message = {
+                "device": "controller",
+                "data": {
+                    "temp": temperature
+                }
+            }
+            self.__client.publish(f'smart/{room}/{name}', json.dumps(message))
+        except:
+            return False

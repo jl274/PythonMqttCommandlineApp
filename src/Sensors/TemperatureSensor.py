@@ -15,11 +15,14 @@ class TemperatureSensor:
         self.__temp = 21
 
     def __on_connect(self, client, userdata, flags, rc):
-        self.__client.subscribe(f'smart/{self.__path}')
+        print(f'smart/{self.__path}')
+        self.__client.subscribe([(f'smart/{self.__path}', 0)])
 
     def __on_message(self, client, userdata, msg):
-        msg_int = int(str(msg.payload.decode("utf-8", "ignore")))
-        self.set_temperature(msg_int)
+        message = json.loads(str(msg.payload.decode("utf-8", "ignore")))["data"]
+        if message["temp"] is not False:
+            self.set_temperature(int(message["temp"]))
+            self.send_temperature_raport()
 
     def set_temperature(self, temp):
         self.__temp = temp
@@ -27,5 +30,5 @@ class TemperatureSensor:
     def send_temperature_raport(self):
         temperature = self.__temp
         self.__client.publish(f'smart',
-                              json.dumps({"from": f"smart/{self.__path}", "temp": temperature}))
+                              json.dumps({"device": f"smart/{self.__path}", "data": temperature}))
 
