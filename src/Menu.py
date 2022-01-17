@@ -1,5 +1,6 @@
 from src.Controller import SmartHomeSystem
 from src.MenuElements.TempSensor import temp_sensor_menu
+from src.MenuElements.LightSwitch import light_switch_menu
 
 if __name__ == "__main__":
     controller = SmartHomeSystem()
@@ -57,9 +58,15 @@ if __name__ == "__main__":
                             print(room_menu_option)
                         selected_room_menu_option = input(f'{selected_room}#\t')
 
-                        # temperature menu
+                        # entering proper menu
                         if selected_room_menu_option in devices_in_room:
-                            temp_sensor_menu(selected_room, selected_room_menu_option, controller)
+
+                            device_type = controller.get_device_type(selected_room, selected_room_menu_option)
+                            if device_type == "temp_sensor":
+                                temp_sensor_menu(selected_room, selected_room_menu_option, controller)
+                            elif device_type == "light_switch":
+                                light_switch_menu(selected_room, selected_room_menu_option, controller)
+
                         if selected_room_menu_option == "r":
                             break
                         elif selected_room_menu_option == "a":
@@ -69,18 +76,22 @@ if __name__ == "__main__":
                                 print("\nAvailable devices (enter option number):")
                                 devices = {
                                     "cancel": "Enter \"c\" to Cancel",
-                                    "temp_sensor": "1.\tTemperature sensor"
+                                    "temp_sensor": "1.\tTemperature sensor",
+                                    "light_switch": "2.\tLight switch"
                                 }
                                 for device in devices.values():
                                     print(device)
                                 selected_device = input(f"{selected_room}#\t")
                                 if selected_device == "c":
                                     break
-                                elif selected_device == "1":
+                                elif selected_device in ["1", "2"]:
                                     is_added = False
                                     while not is_added:
                                         device_name = input(f'Name your device:\t')
-                                        is_added = controller.add_device(device_name, selected_room, 'temp_sensor')
+                                        if selected_device == "1":
+                                            is_added = controller.add_device(device_name, selected_room, 'temp_sensor')
+                                        elif selected_device == "2":
+                                            is_added = controller.add_device(device_name, selected_room, 'light_switch')
                                         if not is_added:
                                             print("Name already taken")
                                     break
