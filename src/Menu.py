@@ -28,14 +28,13 @@ if __name__ == "__main__":
 
             while True:
                 rooms = controller.get_rooms()
-                print("\nAvailable rooms: ", end="\t")
+                print("\nAvailable rooms (enter room name to continue): ", end="")
                 if len(rooms) == 0:
-                    print("No rooms added yet", end=" ")
+                    print("\n\t*No rooms added yet", end="")
                 else:
                     for room in rooms:
-                        print(room, end=" ")
+                        print("\n\t*" + room, end="")
                 print(
-                    "\nEnter room name to continue" +
                     "\nEnter \"r\" to return" +
                     "\nEnter \"a\" to add new room"
                 )
@@ -45,10 +44,11 @@ if __name__ == "__main__":
                     # inside rooms menu
                     while True:
 
-                        print(f"\nAvailable devices in {selected_room}:\t")
+                        print(f"\nAvailable devices in {selected_room}:\t", end="")
                         devices_in_room = controller.get_room_devices(selected_room)
                         for room_device in devices_in_room:
-                            print("\t" + room_device)
+                            print("\n\t*" + room_device, end="")
+                        print()
 
                         room_menu_options = {
                             "r": "1.\tEnter \"r\" to return",
