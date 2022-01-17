@@ -23,6 +23,7 @@ class LightSwitch:
     def __on_message(self, client, userdata, msg):
         message = json.loads(str(msg.payload.decode("utf-8", "ignore")))["data"]
         self.__on = message["switch"]
+        self.send_on_report()
 
     def __set_interval(self, func, sec):
         def func_wrapper():

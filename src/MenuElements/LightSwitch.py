@@ -20,5 +20,6 @@ def light_switch_menu(room_t, device_t, controller_t: SmartHomeSystem):
             break
         elif selected_sensor_menu == "s":
             controller_t.switch_light(not last_data["data"], room_t, device_t)
+            last_data["data"] = not last_data["data"]
         else:
             print("Invalid option")

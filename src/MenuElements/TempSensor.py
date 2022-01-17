@@ -18,5 +18,6 @@ def temp_sensor_menu(room_t, device_t, controller_t: SmartHomeSystem):
         elif selected_sensor_menu == "s":
             new_temperature = input("Set temperature:\t")
             controller_t.set_temperature(int(new_temperature), room_t, device_t)
+            last_data["data"] = new_temperature
         else:
             print("Invalid option")
