@@ -7,7 +7,8 @@ if __name__ == "__main__":
     menu = {
         0: "\nSmart home controller menu:",
         "q": "1.\tEnter \"q\" to quit",
-        "r": "2.\tEnter \"r\" to go to rooms list"
+        "r": "2.\tEnter \"r\" to go to rooms list",
+        "ls": "3.\tEnter \"ls\" to list all devices"
         # ,"a": "2.\tEnter \"a\" to add new device"
     }
     while controller.connected():
@@ -110,6 +111,20 @@ if __name__ == "__main__":
 
                 else:
                     print("Invalid room")
+
+        elif selected == "ls":
+            ls = controller.list_devices()
+            if len(ls) > 0:
+                print()
+                for index in range(len(ls)):
+                    room_name = list(ls[index].keys())[0]
+                    print(f'{room_name}:')
+                    for device in ls[index][room_name]:
+                        print(f'{room_name}/{device}')
+                    print()
+            else:
+                print("No devices added yet")
+            input("Press any key to continue...")
 
         else:
             print("Invalid option")

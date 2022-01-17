@@ -76,6 +76,18 @@ class SmartHomeSystem:
         dev_type = self.__devices[room][name]
         return dev_type
 
+    # list devices
+    def list_devices(self):
+        devices = []
+        for room in self.__devices.keys():
+            room_devices = {room: []}
+            if len(self.__devices[room]) == 0:
+                break
+            for device in self.__devices[room].keys():
+                room_devices[room].append(device)
+            devices.append(room_devices)
+        return devices
+
     # temperature sensor
     def set_temperature(self, temperature, room, name):
         try:
