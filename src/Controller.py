@@ -68,6 +68,7 @@ class SmartHomeSystem:
                 devices.append(device)
         return devices
 
+    # temperature sensor
     def set_temperature(self, temperature, room, name):
         try:
             message = {
@@ -77,5 +78,19 @@ class SmartHomeSystem:
                 }
             }
             self.__client.publish(f'smart/{room}/{name}', json.dumps(message))
+        except:
+            return False
+
+    # light switch
+    def switch_light(self, is_on: bool, room, name):
+        try:
+            message = {
+                "device": "controller",
+                "data": {
+                    "switch": is_on
+                }
+            }
+            self.__client.publish(f'smart/{room}/{name}', json.dumps(message))
+            return True
         except:
             return False
