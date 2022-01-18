@@ -1,6 +1,7 @@
 from src.Controller import SmartHomeSystem
 from src.MenuElements.TempSensor import temp_sensor_menu
 from src.MenuElements.LightSwitch import light_switch_menu
+from src.MenuElements.SmartTv import smart_tv_menu
 
 if __name__ == "__main__":
     controller = SmartHomeSystem()
@@ -67,6 +68,8 @@ if __name__ == "__main__":
                                 temp_sensor_menu(selected_room, selected_room_menu_option, controller)
                             elif device_type == "light_switch":
                                 light_switch_menu(selected_room, selected_room_menu_option, controller)
+                            elif device_type == "smart_tv":
+                                smart_tv_menu(selected_room, selected_room_menu_option, controller)
 
                         if selected_room_menu_option == "r":
                             break
