@@ -1,8 +1,8 @@
 import paho.mqtt.client as mqtt
 import json
 from datetime import datetime
-from src.Sensors.TemperatureSensor import TemperatureSensor
-from src.Sensors.LightSwitch import LightSwitch
+from src.Devices.TemperatureSensor import TemperatureSensor
+from src.Devices.LightSwitch import LightSwitch
 
 
 class SmartHomeSystem:
