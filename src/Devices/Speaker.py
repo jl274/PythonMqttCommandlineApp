@@ -38,6 +38,7 @@ class Speaker:
     def __song_ends(self):
         self.__is_playing = False
         self.__song = ""
+        self.send_speaker_report()
 
     def send_speaker_report(self):
         data = {
@@ -49,11 +50,11 @@ class Speaker:
         if song or duration_in_seconds:
             self.__is_playing = True
             self.__song = song
-            self.__time_left = duration_in_seconds + 5
+            self.__time_left = duration_in_seconds
         self.send_speaker_report()
         if self.__time_left <= 0:
             self.__time_left = 0
             self.__song_ends()
         else:
             self.__time_left -= 5
-            self.__set_timeout(self.play(), 5)
+            self.__set_timeout(self.play, 5)
