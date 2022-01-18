@@ -16,7 +16,7 @@ class Speaker:
         self.__is_playing = False
         self.__song = ""
         self.__time_left = 0
-        # self.send_tv_report()
+        self.send_speaker_report()
 
     def __on_connect(self, client, userdata, flags, rc):
         self.__client.subscribe([(f'smart/{self.__path}', 0)])
@@ -25,7 +25,7 @@ class Speaker:
         message = json.loads(str(msg.payload.decode("utf-8", "ignore")))["data"]
         is_on, is_playing, song = message["is_on"], message["is_playing"], message["song"]
         if song != "":
-            self.play(song, message["duration"])
+            self.play(song, message["time_left"])
         if is_on != self.__is_on:
             self.__is_on = is_on
 

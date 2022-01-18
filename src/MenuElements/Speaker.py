@@ -14,6 +14,8 @@ def speaker_menu_component(room_t, device_t, controller_t: SmartHomeSystem):
             last_data["data"]["song"], last_data["data"]["time_left"]
         ]
         is_speaker_on = "off"
+        if is_on:
+            is_speaker_on = "on"
 
         speaker_menu = {
             "actions": "Available actions:\t",
