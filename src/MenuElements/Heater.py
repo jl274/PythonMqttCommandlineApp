@@ -1,7 +1,7 @@
 from src.Controller import SmartHomeSystem
 
 
-def temp_sensor_menu(room_t, device_t, controller_t: SmartHomeSystem):
+def heater_menu(room_t, device_t, controller_t: SmartHomeSystem):
     last_data = controller_t.find_last_report(f'{room_t}/{device_t}')
     while True:
         print("\nTemperature: {} - {}".format(last_data["data"], last_data["date"]))

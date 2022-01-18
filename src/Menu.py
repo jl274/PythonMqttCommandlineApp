@@ -1,5 +1,5 @@
 from src.Controller import SmartHomeSystem
-from src.MenuElements.TempSensor import temp_sensor_menu
+from src.MenuElements.Heater import heater_menu
 from src.MenuElements.LightSwitch import light_switch_menu
 from src.MenuElements.SmartTv import smart_tv_menu
 from src.MenuElements.Logs import logs_menu
@@ -64,8 +64,8 @@ if __name__ == "__main__":
                         if selected_room_menu_option in devices_in_room:
 
                             device_type = controller.get_device_type(selected_room, selected_room_menu_option)
-                            if device_type == "temp_sensor":
-                                temp_sensor_menu(selected_room, selected_room_menu_option, controller)
+                            if device_type == "heater":
+                                heater_menu(selected_room, selected_room_menu_option, controller)
                             elif device_type == "light_switch":
                                 light_switch_menu(selected_room, selected_room_menu_option, controller)
                             elif device_type == "smart_tv":
@@ -80,7 +80,7 @@ if __name__ == "__main__":
                                 print("\nAvailable devices (enter option number):")
                                 devices = {
                                     "cancel": "Enter \"c\" to Cancel",
-                                    "temp_sensor": "1.\tTemperature sensor",
+                                    "heater": "1.\tHeater",
                                     "light_switch": "2.\tLight switch",
                                     "smart_tv": "3.\tSmart TV"
                                 }
@@ -94,7 +94,7 @@ if __name__ == "__main__":
                                     while not is_added:
                                         device_name = input(f'Name your device:\t')
                                         if selected_device == "1":
-                                            is_added = controller.add_device(device_name, selected_room, 'temp_sensor')
+                                            is_added = controller.add_device(device_name, selected_room, 'heater')
                                         elif selected_device == "2":
                                             is_added = controller.add_device(device_name, selected_room, 'light_switch')
                                         elif selected_device == "3":

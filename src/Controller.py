@@ -1,7 +1,7 @@
 import paho.mqtt.client as mqtt
 import json
 from datetime import datetime
-from src.Devices.TemperatureSensor import TemperatureSensor
+from src.Devices.Heater import Heater
 from src.Devices.LightSwitch import LightSwitch
 from src.Devices.SmartTv import SmartTV
 
@@ -48,7 +48,7 @@ class SmartHomeSystem:
 
     def add_device(self, name, room, device_type):
         device_types = {
-            "temp_sensor": TemperatureSensor,
+            "heater": Heater,
             "light_switch": LightSwitch,
             "smart_tv": SmartTV
         }

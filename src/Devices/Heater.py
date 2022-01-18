@@ -3,7 +3,7 @@ import json
 import threading
 
 
-class TemperatureSensor:
+class Heater:
 
     def __init__(self, path):
         self.__path = path
