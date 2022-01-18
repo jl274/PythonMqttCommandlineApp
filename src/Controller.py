@@ -147,3 +147,16 @@ class SmartHomeSystem:
             return True
         except:
             return False
+
+    # speaker remote
+    def use_speaker_remote(self, is_on, song, is_playing, time_left, room, name):
+        try:
+            message = {
+                "device": "controller",
+                "data": {
+                    "is_on": is_on, "song": song, "is_playing": is_playing, "time_left": time_left
+                }
+            }
+            self.__client.publish(f'smart/{room}/{name}', json.dumps(message))
+        except:
+            return False
