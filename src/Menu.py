@@ -35,7 +35,7 @@ if __name__ == "__main__":
                     print("\n\t*No rooms added yet", end="")
                 else:
                     for room in rooms:
-                        print("\n\t*" + room, end="")
+                        print("\n\t* " + room, end="")
                 print(
                     "\nEnter \"r\" to return" +
                     "\nEnter \"a\" to add new room"
@@ -49,7 +49,7 @@ if __name__ == "__main__":
                         print(f"\nAvailable devices in {selected_room}:\t", end="")
                         devices_in_room = controller.get_room_devices(selected_room)
                         for room_device in devices_in_room:
-                            print("\n\t*" + room_device, end="")
+                            print("\n\t* " + room_device, end="")
                         print()
 
                         room_menu_options = {
