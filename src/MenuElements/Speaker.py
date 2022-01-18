@@ -23,8 +23,6 @@ def speaker_menu_component(room_t, device_t, controller_t: SmartHomeSystem):
         print("\nSpeaker is {}".format(is_speaker_on))
 
         if is_on:
-            is_speaker_on = "on"
-
             if is_playing:
                 print("Status: playing now {}. Time left: {}".format(song, time_left))
                 speaker_menu = {

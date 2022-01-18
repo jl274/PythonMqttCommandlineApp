@@ -4,6 +4,7 @@ from datetime import datetime
 from src.Devices.Heater import Heater
 from src.Devices.LightSwitch import LightSwitch
 from src.Devices.SmartTv import SmartTV
+from src.Devices.Speaker import Speaker
 
 
 class SmartHomeSystem:
@@ -50,7 +51,8 @@ class SmartHomeSystem:
         device_types = {
             "heater": Heater,
             "light_switch": LightSwitch,
-            "smart_tv": SmartTV
+            "smart_tv": SmartTV,
+            "speaker": Speaker
         }
         if name in self.__devices[room].keys():
             return False
