@@ -88,6 +88,13 @@ class SmartHomeSystem:
                 break
         return logs
 
+    def get_all_device_logs(self, device_name: str) -> list:
+        logs = []
+        for log in self.__reports:
+            if log["device"] == device_name:
+                logs.append(log)
+        return logs
+
     # list devices
     def list_devices(self):
         devices = []

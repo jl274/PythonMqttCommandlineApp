@@ -2,7 +2,7 @@ from src.Controller import SmartHomeSystem
 from src.MenuElements.TempSensor import temp_sensor_menu
 from src.MenuElements.LightSwitch import light_switch_menu
 from src.MenuElements.SmartTv import smart_tv_menu
-from datetime import datetime
+from src.MenuElements.Logs import logs_menu
 
 if __name__ == "__main__":
     controller = SmartHomeSystem()
@@ -10,8 +10,7 @@ if __name__ == "__main__":
         0: "\nSmart home controller menu:",
         "q": "1.\tEnter \"q\" to quit",
         "r": "2.\tEnter \"r\" to go to rooms list",
-        "ls": "3.\tEnter \"ls\" to list all devices",
-        "lg": "4.\tEnter \"lg\" to see controller logs"
+        "lg": "3.\tEnter \"lg\" to see controller logs"
     }
     while controller.connected():
 
@@ -119,34 +118,9 @@ if __name__ == "__main__":
                 else:
                     print("Invalid room")
 
-        # list all devices
-        elif selected == "ls":
-            ls = controller.list_devices()
-            if len(ls) > 0:
-                print()
-                for index in range(len(ls)):
-                    room_name = list(ls[index].keys())[0]
-                    print(f'{room_name}:')
-                    for device in ls[index][room_name]:
-                        print(f'{room_name}/{device}')
-                    print()
-            else:
-                print("No devices added yet")
-            input("Press any key to continue...")
-
-        # show last 50 logs
+        # logs menu
         elif selected == "lg":
-            print()
-            lg = controller.get_logs(50)
-            if len(lg) > 0:
-                date_now = datetime.now()
-                print(f"***Logs for {date_now}***")
-                for log in lg:
-                    print("Device: {}, Date: {}, Data: {}".format(log["device"], log["date"], log["data"]))
-                print("*** --- ***")
-            else:
-                print("No logs registered yet")
-            input("Press any key to continue...")
+            logs_menu(controller)
 
         else:
             print("Invalid option")
