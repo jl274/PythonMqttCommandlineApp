@@ -78,14 +78,15 @@ if __name__ == "__main__":
                                 devices = {
                                     "cancel": "Enter \"c\" to Cancel",
                                     "temp_sensor": "1.\tTemperature sensor",
-                                    "light_switch": "2.\tLight switch"
+                                    "light_switch": "2.\tLight switch",
+                                    "smart_tv": "3.\tSmart TV"
                                 }
                                 for device in devices.values():
                                     print(device)
                                 selected_device = input(f"{selected_room}#\t")
                                 if selected_device == "c":
                                     break
-                                elif selected_device in ["1", "2"]:
+                                elif selected_device in ["1", "2", "3"]:
                                     is_added = False
                                     while not is_added:
                                         device_name = input(f'Name your device:\t')
@@ -93,6 +94,8 @@ if __name__ == "__main__":
                                             is_added = controller.add_device(device_name, selected_room, 'temp_sensor')
                                         elif selected_device == "2":
                                             is_added = controller.add_device(device_name, selected_room, 'light_switch')
+                                        elif selected_device == "3":
+                                            is_added = controller.add_device(device_name, selected_room, "smart_tv")
                                         if not is_added:
                                             print("Name already taken")
                                     break

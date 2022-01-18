@@ -3,6 +3,7 @@ import json
 from datetime import datetime
 from src.Devices.TemperatureSensor import TemperatureSensor
 from src.Devices.LightSwitch import LightSwitch
+from src.Devices.SmartTv import SmartTV
 
 
 class SmartHomeSystem:
@@ -48,7 +49,8 @@ class SmartHomeSystem:
     def add_device(self, name, room, device_type):
         device_types = {
             "temp_sensor": TemperatureSensor,
-            "light_switch": LightSwitch
+            "light_switch": LightSwitch,
+            "smart_tv": SmartTV
         }
         if name in self.__devices[room].keys():
             return False
