@@ -114,3 +114,17 @@ class SmartHomeSystem:
             return True
         except:
             return False
+
+    # tv remote
+    def use_tv_remote(self, is_on: bool, channel: int, volume: int, is_recording: bool, room, name):
+        try:
+            message = {
+                "device": "controller",
+                "data": {
+                    "is_on": is_on, "channel": channel, "volume": volume, "is_recording": is_recording
+                }
+            }
+            self.__client.publish(f'smart/{room}/{name}', json.dumps(message))
+            return True
+        except:
+            return False
