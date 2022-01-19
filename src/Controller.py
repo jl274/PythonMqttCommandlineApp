@@ -5,6 +5,7 @@ from src.Devices.Heater import Heater
 from src.Devices.LightSwitch import LightSwitch
 from src.Devices.SmartTv import SmartTV
 from src.Devices.Speaker import Speaker
+from src.Devices.SmartBlinds import SmartBlinds
 
 
 class SmartHomeSystem:
@@ -52,7 +53,8 @@ class SmartHomeSystem:
             "heater": Heater,
             "light_switch": LightSwitch,
             "smart_tv": SmartTV,
-            "speaker": Speaker
+            "speaker": Speaker,
+            "smart_blinds": SmartBlinds
         }
         if name in self.__devices[room].keys():
             return False
@@ -129,6 +131,20 @@ class SmartHomeSystem:
                 "device": "controller",
                 "data": {
                     "switch": is_on
+                }
+            }
+            self.__client.publish(f'smart/{room}/{name}', json.dumps(message))
+            return True
+        except:
+            return False
+
+    # smart blinds
+    def switch_blinds(self, on_status, room, name):
+        try:
+            message = {
+                "device": "controller",
+                "data": {
+                    "on_status": on_status
                 }
             }
             self.__client.publish(f'smart/{room}/{name}', json.dumps(message))
