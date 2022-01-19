@@ -32,9 +32,11 @@ class SmartBlinds:
 
     def __open(self):
         self.__on_status = "Open"
+        self.send_on_report()
 
     def __close(self):
         self.__on_status = "Closed"
+        self.send_on_report()
 
     @staticmethod
     def __set_timeout(func, sec):

@@ -30,10 +30,10 @@ def smart_blinds_menu(room_t, device_t, controller_t: SmartHomeSystem):
 
         elif selected_blinds_menu == "s" and open_status not in ["Opening...", "Closing..."]:
             if open_status == "Open":
-                pass
+                controller_t.switch_blinds("Closed", room_t, device_t)
                 last_data["data"] = "Closing..."
             elif open_status == "Closed":
-                pass
+                controller_t.switch_blinds("Open", room_t, device_t)
                 last_data["data"] = "Opening..."
 
         else:
