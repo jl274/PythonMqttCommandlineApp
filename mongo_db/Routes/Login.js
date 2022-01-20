@@ -52,4 +52,33 @@ router.post('/', async (req, res) => {
     }
 })
 
+router.delete('/:login', async (req, res) => {
+
+    const { login: loginToDelete } = req.params;
+    const { login, password } = req.body;
+
+    if (!(login && password) || Object.keys(req.body).length !== 2){
+        return res.status(400).json({err: "Invalid arguments"})
+    }
+
+    try {
+
+        const logged = await Login.findOne({login})
+        if (!(logged)){
+            return res.status(404).json({err: "Login not found"});
+        }
+        if (logged.password === password && logged.role == "root"){
+
+            await Login.deleteOne({login: loginToDelete});
+            return res.json("Deleted")
+
+        } else {
+            return res.status(400).json({err: "Not permitted"});
+        }
+
+    } catch (err) {
+        return res.status(500).json({err})
+    }
+})
+
 module.exports = router;
