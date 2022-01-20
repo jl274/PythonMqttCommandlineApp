@@ -196,3 +196,16 @@ class SmartHomeSystem:
             self.__client.publish(f'smart/{room}/{name}', json.dumps(message))
         except:
             return False
+
+    # smart oven
+    def control_smart_oven(self, is_on, temp, time, room, name):
+        try:
+            message = {
+                "device": "controller",
+                "data": {
+                    "is_on": is_on, "temp": temp, "time": time
+                }
+            }
+            self.__client.publish(f'smart/{room}/{name}', json.dumps(message))
+        except:
+            return False
