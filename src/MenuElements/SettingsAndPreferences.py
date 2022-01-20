@@ -5,18 +5,20 @@ import hashlib
 
 def settings(controller_t: SmartHomeSystem):
     while True:
+        print()
         if controller_t.role == "root":
             settings_menu = {
                 "actions": "Available actions:\t",
                 "a": "1.\tEnter \"a\" to add user",
                 "ls": "2.\tEnter \"ls\" to list users",
-                "d": "1.\tEnter \"d\" to select and delete user",
-                "r": "1.\tEnter \"r\" to return"
+                "d": "3.\tEnter \"d\" to select and delete user",
+                "r": "4.\tEnter \"r\" to return"
             }
         else:
             settings_menu = {
                 "actions": "Available actions:\t",
-                "r": "1.\tEnter \"r\" to return"
+                "ls": "1.\tEnter \"ls\" to list users",
+                "r": "2.\tEnter \"r\" to return"
             }
         for settings_menu_option in settings_menu.values():
             print(settings_menu_option)
@@ -47,6 +49,14 @@ def settings(controller_t: SmartHomeSystem):
 
         elif selected_settings_menu == "s":
             pass
+
+        elif selected_settings_menu == "ls":
+            r = requests.get('http://localhost:5000/login').json()
+            print("Users:")
+            for user in r:
+                print(f'\t* {user}')
+            input("Click enter to continue...")
+            print()
 
         else:
             print("Invalid option")
