@@ -16,3 +16,4 @@ def LoginMenu() -> str:
         r = requests.get(f"http://localhost:5000/login/{login}", json={"password": hashed_password}).json()
         if r["logged"]:
             return r["role"]
+        print("Invalid login data")

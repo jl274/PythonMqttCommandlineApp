@@ -5,8 +5,20 @@ from src.MenuElements.SmartTv import smart_tv_menu
 from src.MenuElements.Logs import logs_menu
 from src.MenuElements.Speaker import speaker_menu_component
 from src.MenuElements.SmartBlinds import smart_blinds_menu
+from src.MenuElements.LoginMenu import LoginMenu
 
 if __name__ == "__main__":
+
+    # login
+    user_role = None
+    while True:
+        user_role = LoginMenu()
+        if user_role:
+            break
+
+    print("***Logged in***\n")
+
+    # functionality
     controller = SmartHomeSystem()
     menu = {
         0: "\nSmart home controller menu:",
