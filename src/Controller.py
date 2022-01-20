@@ -211,3 +211,16 @@ class SmartHomeSystem:
             self.__client.publish(f'smart/{room}/{name}', json.dumps(message))
         except:
             return False
+
+    # coffee maker
+    def coffee_maker_controller(self, is_on, action, room, name):
+        try:
+            message = {
+                "device": "controller",
+                "data": {
+                    "is_on": is_on, "action": action
+                }
+            }
+            self.__client.publish(f'smart/{room}/{name}', json.dumps(message))
+        except:
+            return False
