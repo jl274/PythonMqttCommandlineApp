@@ -3,6 +3,19 @@ const router = express.Router();
 
 const Login = require('../models/Login');
 
+router.get('/', async (req, res) => {
+    try {
+
+        const logins_array = []
+        const logins = await Login.find({})
+        logins.forEach((user) => logins_array.push(`${user.login} (${user.role})`));
+        return res.json(logins_array)
+
+    } catch (err) {
+        return res.status(500).json({err})
+    }
+})
+
 router.get('/:login', async (req, res) => {
     const { login } = req.params;
     const { password } = req.body;
