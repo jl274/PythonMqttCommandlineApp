@@ -47,8 +47,19 @@ def settings(controller_t: SmartHomeSystem):
             else:
                 print("Error occurred. Try again...")
 
-        elif selected_settings_menu == "s":
-            pass
+        elif selected_settings_menu == "d" and controller_t.role == "root":
+            delete_login = input("Login to delete:\t")
+            root_login = input("Admin login:\t")
+            root_password = input("Root password:\t")
+            hashed_password = hashlib.md5(root_password.encode()).hexdigest()
+            r = requests.delete(
+                f'http://localhost:5000/login/{delete_login}',
+                json={"login": root_login, "password": hashed_password}
+            )
+            if r.status_code == 200:
+                print("Successfully deleted")
+            else:
+                print("Error occurred")
 
         elif selected_settings_menu == "ls":
             r = requests.get('http://localhost:5000/login').json()
