@@ -66,6 +66,20 @@ class SmartHomeSystem:
     def add_room(self, room):
         self.__devices[room] = {}
 
+    def delete_device(self, room, device):
+        if room in self.__devices.keys():
+            del self.__devices[room][device]
+            return True
+        return False
+
+    def move_device(self, room, device, new_room):
+        if new_room in self.__devices.keys():
+            device_type = self.__devices[room][device]
+            del self.__devices[room][device]
+            self.__devices[new_room][device] = device_type
+            return True
+        return False
+
     def get_rooms(self):
         rooms = []
         for room in self.__devices.keys():
