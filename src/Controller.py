@@ -40,6 +40,9 @@ class SmartHomeSystem:
         }] + self.__reports
         # print(message)
 
+    def change_active_role(self, role):
+        self.role = role
+
     def find_last_report(self, device):
         for index in range(len(self.__reports)):
             if self.__reports[index]["device"] == device:
