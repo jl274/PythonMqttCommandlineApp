@@ -72,7 +72,7 @@ if __name__ == "__main__":
                             "r": "1.\tEnter \"r\" to return",
                             "a": "2.\tEnter \"a\" to add new device"
                         }
-                        if controller.role == "root":
+                        if controller.role == "root" and len(devices_in_room) != 0:
                             room_menu_options = {
                                 "r": "1.\tEnter \"r\" to return",
                                 "a": "2.\tEnter \"a\" to add new device",
@@ -104,7 +104,9 @@ if __name__ == "__main__":
                             break
 
                         # move
-                        elif selected_room_menu_option == "m" and controller.role == "root":
+                        elif selected_room_menu_option == "m" \
+                                and controller.role == "root" \
+                                and len(devices_in_room) != 0:
                             print()
                             device_name = input(f"Device name:\t")
                             new_room = input(f"New room name:\t")
@@ -115,7 +117,9 @@ if __name__ == "__main__":
                                 print("Problem occurred. Device wasn't moved")
 
                         # delete
-                        elif selected_room_menu_option == "d" and controller.role == "root":
+                        elif selected_room_menu_option == "d" \
+                                and controller.role == "root" \
+                                and len(devices_in_room) != 0:
                             print()
                             print("Enter device name:")
                             device_to_delete = input(f"{selected_room}#\t")
