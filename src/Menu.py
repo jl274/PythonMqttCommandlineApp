@@ -105,11 +105,14 @@ if __name__ == "__main__":
 
                         # move
                         elif selected_room_menu_option == "m" and controller.role == "root":
-                            while True:
-                                device_name = input(f"Device name:\t")
-                                new_room = input(f"New room name:\t")
-                                print("Currently unavailable...")
-                                break
+                            print()
+                            device_name = input(f"Device name:\t")
+                            new_room = input(f"New room name:\t")
+                            moved = controller.move_device(selected_room, device_name, new_room)
+                            if moved:
+                                print(f"Moved successfully {device_name} to {new_room}")
+                            else:
+                                print("Problem occurred. Device wasn't moved")
 
                         # delete
                         elif selected_room_menu_option == "d" and controller.role == "root":
