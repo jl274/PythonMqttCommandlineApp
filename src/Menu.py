@@ -6,6 +6,7 @@ from src.MenuElements.Logs import logs_menu
 from src.MenuElements.Speaker import speaker_menu_component
 from src.MenuElements.SmartBlinds import smart_blinds_menu
 from src.MenuElements.LoginMenu import LoginMenu
+from src.MenuElements.SettingsAndPreferences import settings
 
 if __name__ == "__main__":
 
@@ -19,12 +20,13 @@ if __name__ == "__main__":
     print("***Logged in***\n")
 
     # functionality
-    controller = SmartHomeSystem()
+    controller = SmartHomeSystem(role=user_role)
     menu = {
         0: "\nSmart home controller menu:",
         "q": "1.\tEnter \"q\" to quit",
         "r": "2.\tEnter \"r\" to go to rooms list",
-        "lg": "3.\tEnter \"lg\" to see controller logs"
+        "lg": "3.\tEnter \"lg\" to see controller logs",
+        "s": "4.\tEnter \"s\" to go to settings"
     }
     while controller.connected():
 
@@ -145,6 +147,10 @@ if __name__ == "__main__":
         # logs menu
         elif selected == "lg":
             logs_menu(controller)
+
+        # settings
+        elif selected == "s":
+            settings(controller)
 
         else:
             print("Invalid option")

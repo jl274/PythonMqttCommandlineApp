@@ -10,7 +10,8 @@ from src.Devices.SmartBlinds import SmartBlinds
 
 class SmartHomeSystem:
 
-    def __init__(self):
+    def __init__(self, role="user"):
+        self.role = role
         self.__connected = False
         self.__client = mqtt.Client()
         self.__reports = []
