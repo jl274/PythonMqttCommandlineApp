@@ -33,8 +33,8 @@ class CoffeeMaker:
     def make_coffee(self):
         if self.__coffee_beans_level >= 0.05:
             if self.__water_level >= 0.1:
-                self.__coffee_beans_level -= 0.05
-                self.__water_level -= 0.1
+                self.__coffee_beans_level = round(self.__coffee_beans_level - 0.05, 2)
+                self.__water_level = round(self.__water_level - 0.1, 2)
                 self.__status = "Making coffee..."
                 self.send_report()
                 self.__set_timeout(self.coffee_made, 10)

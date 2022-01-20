@@ -40,7 +40,7 @@ def smart_coffee_menu(room_t, device_t, controller_t: SmartHomeSystem):
 
         elif selected_coffee_maker_menu == "m" and is_on:
             controller_t.coffee_maker_controller(is_on, "coffee", room_t, device_t)
-            last_data = controller_t.find_last_report(f'{room_t}/{device_t}')
+            last_data["data"]["status"] = "Making coffee..."
 
         else:
             print("Invalid option")
