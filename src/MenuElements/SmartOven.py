@@ -8,12 +8,23 @@ def smart_oven_menu(room_t, device_t, controller_t: SmartHomeSystem):
 
         if is_on:
             print("\nOven is is on - {}".format(last_data["date"]))
-            oven_menu = {
-                "actions": "Available actions:\t",
-                "s": "1.\tPress \"s\" to turn it off",
-                "h": "1.\tPress \"h\" to set temperature and cooking time",
-                "r": "2.\tPress \"r\" to return"
-            }
+            print(
+                "Temperature: {}°C, Timer: {} seconds left"
+                .format(last_data["data"]["temp"], last_data["data"]["time"])
+            )
+            if time > 0 or temp > 0:
+                oven_menu = {
+                    "actions": "Available actions:\t",
+                    "s": "1.\tPress \"s\" to cancel cooking and turn it off",
+                    "r": "2.\tPress \"r\" to return"
+                }
+            else:
+                oven_menu = {
+                    "actions": "Available actions:\t",
+                    "s": "1.\tPress \"s\" to turn it off",
+                    "h": "2.\tPress \"h\" to set temperature and cooking time",
+                    "r": "3.\tPress \"r\" to return"
+                }
         else:
             print("\nOven is off - {}".format(last_data["date"]))
             oven_menu = {
@@ -45,6 +56,8 @@ def smart_oven_menu(room_t, device_t, controller_t: SmartHomeSystem):
                     print("Time should be between 10 and 18 000 seconds")
                     continue
                 controller_t.control_smart_oven(is_on, new_temp, new_time, room_t, device_t)
+                last_data["data"]["temp"] = int(new_temp)
+                last_data["data"]["time"] = int(new_time)
                 break
 
         else:

@@ -25,6 +25,10 @@ class SmartOven:
         is_on, temp, time = message["is_on"], message["temp"], message["time"]
         if is_on != self.__is_on:
             self.__is_on = is_on
+            if not self.__is_on and self.__time > 0 :
+                self.__time = 0
+                self.__temp = 0
+            self.send_oven_report()
         if is_on and temp != self.__temp and time != self.__time:
             self.oven_working(temp=temp, time=time)
 
@@ -39,6 +43,7 @@ class SmartOven:
             self.__temp = temp
             self.__time = time
             self.send_oven_report()
+            self.__set_timeout(self.oven_working, 10)
         else:
             if self.__time <= 0:
                 self.__time = 0
