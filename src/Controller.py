@@ -6,6 +6,7 @@ from src.Devices.LightSwitch import LightSwitch
 from src.Devices.SmartTv import SmartTV
 from src.Devices.Speaker import Speaker
 from src.Devices.SmartBlinds import SmartBlinds
+from src.Devices.SmartOven import SmartOven
 
 
 class SmartHomeSystem:
@@ -58,7 +59,8 @@ class SmartHomeSystem:
             "light_switch": LightSwitch,
             "smart_tv": SmartTV,
             "speaker": Speaker,
-            "smart_blinds": SmartBlinds
+            "smart_blinds": SmartBlinds,
+            "smart_oven": SmartOven
         }
         if name in self.__devices[room].keys():
             return False

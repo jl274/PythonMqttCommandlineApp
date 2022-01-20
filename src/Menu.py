@@ -7,6 +7,7 @@ from src.MenuElements.Speaker import speaker_menu_component
 from src.MenuElements.SmartBlinds import smart_blinds_menu
 from src.MenuElements.LoginMenu import LoginMenu
 from src.MenuElements.SettingsAndPreferences import settings
+from src.MenuElements.SmartOven import smart_oven_menu
 
 if __name__ == "__main__":
 
@@ -105,6 +106,8 @@ if __name__ == "__main__":
                                     speaker_menu_component(selected_room, selected_room_menu_option, controller)
                                 elif device_type == "smart_blinds":
                                     smart_blinds_menu(selected_room, selected_room_menu_option, controller)
+                                elif device_type == "smart_oven":
+                                    smart_oven_menu(selected_room, selected_room_menu_option, controller)
 
                             # break
                             if selected_room_menu_option == "r":
@@ -148,14 +151,15 @@ if __name__ == "__main__":
                                         "light_switch": "2.\tLight switch",
                                         "smart_tv": "3.\tSmart TV",
                                         "speaker": "4.\tSpeaker",
-                                        "smart_blinds": "5 \tSmart Blinds"
+                                        "smart_blinds": "5.\tSmart Blinds",
+                                        "smart_oven": "6.\tSmart Oven"
                                     }
                                     for device in devices.values():
                                         print(device)
                                     selected_device = input(f"{selected_room}#\t")
                                     if selected_device == "c":
                                         break
-                                    elif selected_device in ["1", "2", "3", "4", "5"]:
+                                    elif selected_device in ["1", "2", "3", "4", "5", "6"]:
                                         is_added = False
                                         while not is_added:
                                             device_name = input(f'Name your device:\t')
@@ -169,6 +173,8 @@ if __name__ == "__main__":
                                                 is_added = controller.add_device(device_name, selected_room, "speaker")
                                             elif selected_device == "5":
                                                 is_added = controller.add_device(device_name, selected_room, "smart_blinds")
+                                            elif selected_device == "6":
+                                                is_added = controller.add_device(device_name, selected_room, "smart_oven")
                                             if not is_added:
                                                 print("Name already taken")
                                         break
