@@ -72,6 +72,14 @@ if __name__ == "__main__":
                             "r": "1.\tEnter \"r\" to return",
                             "a": "2.\tEnter \"a\" to add new device"
                         }
+                        if controller.role == "root":
+                            room_menu_options = {
+                                "r": "1.\tEnter \"r\" to return",
+                                "a": "2.\tEnter \"a\" to add new device",
+                                "m": "3.\tEnter \"m\" to move device to other room",
+                                "d": "4.\tEnter \"d\" to select and delete device"
+                            }
+
                         for room_menu_option in room_menu_options.values():
                             print(room_menu_option)
                         selected_room_menu_option = input(f'{selected_room}#\t')
@@ -91,8 +99,30 @@ if __name__ == "__main__":
                             elif device_type == "smart_blinds":
                                 smart_blinds_menu(selected_room, selected_room_menu_option, controller)
 
+                        # break
                         if selected_room_menu_option == "r":
                             break
+
+                        # move
+                        elif selected_room_menu_option == "m" and controller.role == "root":
+                            while True:
+                                device_name = input(f"Device name:\t")
+                                new_room = input(f"New room name:\t")
+                                print("Currently unavailable...")
+                                break
+
+                        # delete
+                        elif selected_room_menu_option == "d" and controller.role == "root":
+                            print()
+                            print("Enter device name:")
+                            device_to_delete = input(f"{selected_room}#\t")
+                            deleted = controller.delete_device(selected_room, device_to_delete)
+                            if deleted:
+                                print(f"Delete {device_to_delete}")
+                            else:
+                                print("Problem occurred. Device wasn't deleted")
+
+                        # add
                         elif selected_room_menu_option == "a":
 
                             # add device menu
