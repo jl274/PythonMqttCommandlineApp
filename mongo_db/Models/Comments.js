@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 
 const commentSchema = new Schema({
     login: {
-        type: {type: Schema.Types.ObjectId, ref: 'Login'}
+        type: Schema.Types.ObjectId, ref: 'Login', required: true
     },
     date: {
         type: Date,
