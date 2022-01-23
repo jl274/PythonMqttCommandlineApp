@@ -241,5 +241,4 @@ if __name__ == "__main__":
             else:
                 print("Invalid option")
 
-        print(controller.get_devices())
         requests.post("http://localhost:5000/backup", json={"devices": controller.get_devices()})

@@ -37,12 +37,19 @@ def import_menu(controller_t: SmartHomeSystem):
                 if int(selected_logs_menu) in range(1, len(backups)+1):
 
                     selected_backup = backups[int(selected_logs_menu)-1]
+                    print("Working on it. Please wait...")
                     for room in selected_backup["rooms"]:
                         controller_t.add_room(room)
-                        for device in selected_backup["devices"][room]:
-                            device_name = device
-                            device_type = selected_backup["devices"][room][device]
-                            controller_t.add_device(device_name, room, device_type)
+                        print(f"Importing {room}")
+                        try:
+                            for device in selected_backup["devices"][room]:
+                                device_name = device
+                                device_type = selected_backup["devices"][room][device]
+                                controller_t.add_device(device_name, room, device_type)
+                        finally:
+                            continue
+
+                    print()
                     print("Import completed")
                     input("Press any key to continue...")
 
