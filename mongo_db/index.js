@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const login = require('./routes/Login');
+const comment = require('./Routes/Comments')
 
 app.use(express.json());
 app.use(function(req, res, next) {
@@ -11,6 +12,7 @@ app.use(function(req, res, next) {
 });
 
 app.use('/login', login);
+app.use('/comments', comment);
 
 
 const dbConnData = {
