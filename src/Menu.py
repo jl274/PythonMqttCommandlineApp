@@ -12,6 +12,7 @@ from src.MenuElements.SmartOven import smart_oven_menu
 from src.MenuElements.CoffeeMaker import smart_coffee_menu
 from src.MenuElements.CleaningRobot import cleaning_robot_menu
 from src.MenuElements.Comments import comments_menu
+from src.MenuElements.Import import import_menu
 
 if __name__ == "__main__":
 
@@ -43,6 +44,16 @@ if __name__ == "__main__":
             "c": "4.\tEnter \"c\" to go to comments",
             "s": "5.\tEnter \"s\" to go to settings"
         }
+        if user_role == "root":
+            menu = {
+                0: "\nSmart home controller menu:",
+                "q": "1.\tEnter \"q\" to quit",
+                "r": "2.\tEnter \"r\" to go to rooms list",
+                "lg": "3.\tEnter \"lg\" to see controller logs",
+                "c": "4.\tEnter \"c\" to go to comments",
+                "s": "5.\tEnter \"s\" to go to settings",
+                "i": "6.\tEnter \"i\" to go to import menu"
+            }
         while controller.connected():
 
             # main menu
@@ -222,6 +233,10 @@ if __name__ == "__main__":
             # comments
             elif selected == "c":
                 comments_menu(controller)
+
+            # import menu
+            elif selected == "i" and user_role == "root":
+                import_menu(controller)
 
             else:
                 print("Invalid option")
