@@ -226,3 +226,16 @@ class SmartHomeSystem:
             self.__client.publish(f'smart/{room}/{name}', json.dumps(message))
         except:
             return False
+
+    # cleaning robot
+    def cleaning_robot_controller(self, task, room, name):
+        try:
+            message = {
+                "device": "controller",
+                "data": {
+                    "task": task
+                }
+            }
+            self.__client.publish(f'smart/{room}/{name}', json.dumps(message))
+        except:
+            return False
