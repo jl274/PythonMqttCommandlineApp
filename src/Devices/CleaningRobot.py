@@ -28,11 +28,16 @@ class CleaningRobot:
             self.cleaning()
         elif message["task"] == "stop":
             self.charging()
+        elif message["task"] == "delay":
+            self.delay_cleaning(message["delay"])
 
     def __set_timeout(self, func, sec):
         t = threading.Timer(sec, func)
         t.start()
         self.__timeout = t.cancel
+
+    def delay_cleaning(self, delay_time: int):
+        self.__set_timeout(self.cleaning, delay_time)
 
     def cleaning(self):
         if self.__cleaning is False:

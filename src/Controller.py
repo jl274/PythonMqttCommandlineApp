@@ -230,12 +230,12 @@ class SmartHomeSystem:
             return False
 
     # cleaning robot
-    def cleaning_robot_controller(self, task, room, name):
+    def cleaning_robot_controller(self, task, room, name, delay=0):
         try:
             message = {
                 "device": "controller",
                 "data": {
-                    "task": task
+                    "task": task, "delay": delay
                 }
             }
             self.__client.publish(f'smart/{room}/{name}', json.dumps(message))
