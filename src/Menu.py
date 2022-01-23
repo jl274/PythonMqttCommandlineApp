@@ -10,6 +10,7 @@ from src.MenuElements.SettingsAndPreferences import settings
 from src.MenuElements.SmartOven import smart_oven_menu
 from src.MenuElements.CoffeeMaker import smart_coffee_menu
 from src.MenuElements.CleaningRobot import cleaning_robot_menu
+from src.MenuElements.Comments import comments_menu
 
 if __name__ == "__main__":
 
@@ -36,7 +37,8 @@ if __name__ == "__main__":
             "q": "1.\tEnter \"q\" to quit",
             "r": "2.\tEnter \"r\" to go to rooms list",
             "lg": "3.\tEnter \"lg\" to see controller logs",
-            "s": "4.\tEnter \"s\" to go to settings"
+            "c": "4.\tEnter \"c\" to go to comments",
+            "s": "5.\tEnter \"s\" to go to settings"
         }
         while controller.connected():
 
@@ -213,6 +215,10 @@ if __name__ == "__main__":
             # settings
             elif selected == "s":
                 settings(controller)
+
+            # comments
+            elif selected == "c":
+                comments_menu(controller)
 
             else:
                 print("Invalid option")
