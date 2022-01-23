@@ -7,6 +7,10 @@ const backupSchema = new Schema({
     },
     devices: {
         type: Schema.Types.Mixed
+    },
+    date: {
+        type: Date,
+        default: new Date()
     }
 });
 
