@@ -36,5 +36,22 @@ router.post('/', async (req, res) => {
     }
 })
 
+router.patch('/', async (req, res) => {
+    const { id, text } = req.body;
+    if (!(text) || !([2].includes(Object.keys(req.body).length))){
+        return res.status(400).json({err: "Invalid body arguments"})
+    }
+    try {
+
+        const comment = await Comment.findOne({_id: id})
+        comment.text = text;
+        await comment.save();
+        return res.json(comment)
+
+    } catch (err) {
+        return res.status(400).json({err})
+    }
+})
+
 
 module.exports = router;
