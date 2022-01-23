@@ -107,6 +107,9 @@ class SmartHomeSystem:
         dev_type = self.__devices[room][name]
         return dev_type
 
+    def get_devices(self):
+        return self.__devices
+
     # logs
     def get_logs(self, number: int) -> list:
         logs = []
