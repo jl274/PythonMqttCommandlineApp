@@ -3,7 +3,7 @@ import requests
 import getpass
 
 
-def LoginMenu() -> str:
+def LoginMenu() -> list:
     """
     :return: "root" or "user
     """
@@ -15,5 +15,5 @@ def LoginMenu() -> str:
 
         r = requests.get(f"http://localhost:5000/login/{login}", json={"password": hashed_password}).json()
         if r["logged"]:
-            return r["role"]
+            return [r["role"], login]
         print("Invalid login data")

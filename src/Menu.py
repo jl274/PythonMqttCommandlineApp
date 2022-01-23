@@ -20,7 +20,9 @@ if __name__ == "__main__":
         # login
         user_role = None
         while True:
-            user_role = LoginMenu()
+            login_menu = LoginMenu()
+            user_role = login_menu[0]
+            login = login_menu[1]
             if user_role:
                 break
 
@@ -28,7 +30,7 @@ if __name__ == "__main__":
 
         # functionality
         if not controller:
-            controller = SmartHomeSystem(role=user_role)
+            controller = SmartHomeSystem(role=user_role, login=login)
 
         controller.change_active_role(user_role)
 

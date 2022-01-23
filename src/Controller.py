@@ -13,8 +13,9 @@ from src.Devices.CleaningRobot import CleaningRobot
 
 class SmartHomeSystem:
 
-    def __init__(self, role="user"):
+    def __init__(self, role="user", login=None):
         self.role = role
+        self.login = login
         self.__connected = False
         self.__client = mqtt.Client()
         self.__reports = []

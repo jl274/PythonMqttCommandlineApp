@@ -48,5 +48,15 @@ def comments_menu(controller_t: SmartHomeSystem):
             print()
             input("Press any key to continue...")
 
+        elif selected_logs_menu == "a":
+            text = input("Enter your comment:\n")
+            r = requests.post("http://localhost:5000/comments", json={"login": controller_t.login, "text": text})
+            if r.status_code == 200:
+                print("Added")
+                comments = requests.get("http://localhost:5000/comments").json()
+            else:
+                print("Server error")
+                input("Press any key to continue...")
+
         else:
             print("Invalid option")
