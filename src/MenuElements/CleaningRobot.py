@@ -7,7 +7,7 @@ def cleaning_robot_menu(room_t, device_t, controller_t: SmartHomeSystem):
         cleaning, battery = last_data["data"]["cleaning"], last_data["data"]["battery"]
 
         if cleaning:
-            print("\nCleaning robot is working - {}".format(cleaning, last_data["date"]))
+            print("\nCleaning robot is working - {}".format(last_data["date"]))
             print("Battery level: {}%".format(battery))
             robot_menu = {
                 "actions": "Available actions:\t",
@@ -15,7 +15,7 @@ def cleaning_robot_menu(room_t, device_t, controller_t: SmartHomeSystem):
                 "r": "2.\tPress \"r\" to return"
             }
         else:
-            print("\nCleaning robot is charging in station - {}".format(cleaning, last_data["date"]))
+            print("\nCleaning robot is charging in station - {}".format(last_data["date"]))
             print("Battery level: {}%".format(battery))
             robot_menu = {
                 "actions": "Available actions:\t",
@@ -37,9 +37,9 @@ def cleaning_robot_menu(room_t, device_t, controller_t: SmartHomeSystem):
                 continue
             last_data["data"]["cleaning"] = not last_data["data"]["cleaning"]
             if cleaning:
-                task = "start"
-            else:
                 task = "stop"
+            else:
+                task = "start"
             controller_t.cleaning_robot_controller(task, room_t, device_t)
 
         else:

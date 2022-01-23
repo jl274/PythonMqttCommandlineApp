@@ -14,6 +14,7 @@ class CleaningRobot:
         self.__client.loop_start()
         self.__cleaning = False
         self.__battery = 100
+        self.__timeout = None
         self.send_report()
 
     def __on_connect(self, client, userdata, flags, rc):
@@ -21,16 +22,17 @@ class CleaningRobot:
 
     def __on_message(self, client, userdata, msg):
         message = json.loads(str(msg.payload.decode("utf-8", "ignore")))["data"]
+        if self.__timeout:
+            self.__timeout()
         if message["task"] == "start":
             self.cleaning()
         elif message["task"] == "stop":
             self.charging()
 
-    @staticmethod
-    def __set_timeout(func, sec):
+    def __set_timeout(self, func, sec):
         t = threading.Timer(sec, func)
         t.start()
-        return t
+        self.__timeout = t.cancel
 
     def cleaning(self):
         if self.__cleaning is False:
@@ -49,7 +51,6 @@ class CleaningRobot:
         else:
             self.__battery += 10
         if self.__battery != 100:
-            self.send_report()
             self.__set_timeout(self.charging, 10)
         self.send_report()
 
