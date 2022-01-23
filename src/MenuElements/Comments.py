@@ -27,7 +27,7 @@ def comments_menu(controller_t: SmartHomeSystem):
             }
         for logs_menu_option in sensor_menu.values():
             print(logs_menu_option)
-        selected_logs_menu = input(f'logs#\t')
+        selected_logs_menu = input(f'comments#\t')
 
         if selected_logs_menu == "r":
             break
