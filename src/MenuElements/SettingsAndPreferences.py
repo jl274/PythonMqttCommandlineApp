@@ -12,7 +12,8 @@ def settings(controller_t: SmartHomeSystem):
                 "a": "1.\tEnter \"a\" to add user",
                 "ls": "2.\tEnter \"ls\" to list users",
                 "d": "3.\tEnter \"d\" to select and delete user",
-                "r": "4.\tEnter \"r\" to return"
+                "p": "4.\tEnter \"p\" to select and change user role",
+                "r": "5.\tEnter \"r\" to return"
             }
         else:
             settings_menu = {
@@ -68,6 +69,19 @@ def settings(controller_t: SmartHomeSystem):
                 print(f'\t* {user}')
             input("Click enter to continue...")
             print()
+
+        elif selected_settings_menu == "p" and controller_t.role == "root":
+            edit_login = input("Login to edit:\t")
+            r = requests.patch(f"http://localhost:5000/login/{edit_login}")
+            if r.status_code == 200:
+                new_role = r.json()["result"]["role"]
+                if new_role == "root":
+                    input(f"User {edit_login} promoted to root\nClick enter to continue...")
+                else:
+                    input(f"User {edit_login} downgraded to user\nClick enter to continue...")
+            else:
+                print("Invalid login")
+                input("Click enter to continue...")
 
         else:
             print("Invalid option")
