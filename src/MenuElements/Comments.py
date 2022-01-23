@@ -62,15 +62,24 @@ def comments_menu(controller_t: SmartHomeSystem):
             comment_number = int(input("Enter comment number:\t"))
             new_text = input("New comment text:\t")
             r = requests.patch(
-                "http://localhost:5000/comments", json={"id": comments[comment_number], "text": new_text}
+                "http://localhost:5000/comments", json={"id": comments[comment_number-1]["_id"], "text": new_text}
             )
             if r.status_code == 200:
                 print("Edited successfully")
-                comments[comment_number]["text"] = new_text
+                comments[comment_number-1]["text"] = new_text
             else:
                 print("Server error")
                 input("Press any key to continue...")
 
+        elif selected_logs_menu == "d" and is_root:
+            comment_number = int(input("Enter comment number:\t"))
+            r = requests.delete("http://localhost:5000/comments/{}".format(comments[comment_number-1]["_id"]))
+            if r.status_code == 200:
+                print("Deleted successfully")
+                del comments[comment_number-1]
+            else:
+                print("Server error")
+                input("Press any key to continue...")
 
         else:
             print("Invalid option")
