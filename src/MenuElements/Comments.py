@@ -58,5 +58,19 @@ def comments_menu(controller_t: SmartHomeSystem):
                 print("Server error")
                 input("Press any key to continue...")
 
+        elif selected_logs_menu == "e" and is_root:
+            comment_number = int(input("Enter comment number:\t"))
+            new_text = input("New comment text:\t")
+            r = requests.patch(
+                "http://localhost:5000/comments", json={"id": comments[comment_number], "text": new_text}
+            )
+            if r.status_code == 200:
+                print("Edited successfully")
+                comments[comment_number]["text"] = new_text
+            else:
+                print("Server error")
+                input("Press any key to continue...")
+
+
         else:
             print("Invalid option")
