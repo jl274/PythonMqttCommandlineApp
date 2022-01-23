@@ -53,5 +53,21 @@ router.patch('/', async (req, res) => {
     }
 })
 
+router.delete('/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+
+        const deleted = await Comment.deleteOne({_id: id});
+        if (deleted.deletedCount === 0){
+            return res.status(404).json({err: "Comment not found"})
+        }
+        return res.json(id)
+
+    } catch (err) {
+        return res.status(400).json({err})
+    }
+})
+
 
 module.exports = router;
