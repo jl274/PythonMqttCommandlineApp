@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
 const login = require('./routes/Login');
-const comment = require('./Routes/Comments')
+const comment = require('./Routes/Comments');
+const backup = require('./Routes/SmartHomeBackup')
 
 app.use(express.json());
 app.use(function(req, res, next) {
@@ -13,6 +14,7 @@ app.use(function(req, res, next) {
 
 app.use('/login', login);
 app.use('/comments', comment);
+app.use('/backup', backup);
 
 
 const dbConnData = {
