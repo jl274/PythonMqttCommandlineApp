@@ -36,6 +36,23 @@ router.get('/:login', async (req, res) => {
     }
 })
 
+router.patch('/:login', async (req, res) => {
+    const { login } = req.params;
+    try {
+
+        const result = await Login.findOne({login});
+        if (!(result)){
+            return res.status(404).json({err: "Login not found"});
+        }
+        result.role = result.role === "user" ? "root" : "user";
+        await result.save();
+        return res.json({result})
+
+    } catch (err) {
+        return res.status(500).json({err})
+    }
+})
+
 
 router.post('/', async (req, res) => {
     const {login, password, role} = req.body;
