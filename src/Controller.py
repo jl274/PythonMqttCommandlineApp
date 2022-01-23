@@ -8,6 +8,7 @@ from src.Devices.Speaker import Speaker
 from src.Devices.SmartBlinds import SmartBlinds
 from src.Devices.SmartOven import SmartOven
 from src.Devices.CoffeeMaker import CoffeeMaker
+from src.Devices.CleaningRobot import CleaningRobot
 
 
 class SmartHomeSystem:
@@ -62,7 +63,8 @@ class SmartHomeSystem:
             "speaker": Speaker,
             "smart_blinds": SmartBlinds,
             "smart_oven": SmartOven,
-            "smart_coffee_maker": CoffeeMaker
+            "smart_coffee_maker": CoffeeMaker,
+            "cleaning_robot": CleaningRobot
         }
         if name in self.__devices[room].keys():
             return False
