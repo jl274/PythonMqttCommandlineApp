@@ -245,3 +245,16 @@ class SmartHomeSystem:
             self.__client.publish(f'smart/{room}/{name}', json.dumps(message))
         except:
             return False
+
+    # smoke detector
+    def simulate_opening_window(self, room, name):
+        try:
+            message = {
+                "device": "controller",
+                "data": {
+                    "task": "open_window"
+                }
+            }
+            self.__client.publish(f'smart/{room}/{name}', json.dumps(message))
+        except:
+            return False
