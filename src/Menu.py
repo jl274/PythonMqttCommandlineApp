@@ -13,6 +13,7 @@ from src.MenuElements.CoffeeMaker import smart_coffee_menu
 from src.MenuElements.CleaningRobot import cleaning_robot_menu
 from src.MenuElements.Comments import comments_menu
 from src.MenuElements.Import import import_menu
+from src.MenuElements.SmokeDetector import smoke_detector_menu
 
 if __name__ == "__main__":
 
@@ -130,6 +131,8 @@ if __name__ == "__main__":
                                     smart_coffee_menu(selected_room, selected_room_menu_option, controller)
                                 elif device_type == "cleaning_robot":
                                     cleaning_robot_menu(selected_room, selected_room_menu_option, controller)
+                                elif device_type == "smoke_detector":
+                                    smoke_detector_menu(selected_room, selected_room_menu_option, controller)
 
                             # break
                             if selected_room_menu_option == "r":
@@ -176,14 +179,15 @@ if __name__ == "__main__":
                                         "smart_blinds": "5.\tSmart Blinds",
                                         "smart_oven": "6.\tSmart Oven",
                                         "smart_coffee_maker": "7.\tSmart Coffee maker",
-                                        "cleaning_robot": "8.\tCleaning robot"
+                                        "cleaning_robot": "8.\tCleaning robot",
+                                        "smoke_detector": "9.\tSmoke detector"
                                     }
                                     for device in devices.values():
                                         print(device)
                                     selected_device = input(f"{selected_room}#\t")
                                     if selected_device == "c":
                                         break
-                                    elif selected_device in ["1", "2", "3", "4", "5", "6", "7", "8"]:
+                                    elif selected_device in ["1", "2", "3", "4", "5", "6", "7", "8", "9"]:
                                         is_added = False
                                         while not is_added:
                                             device_name = input(f'Name your device:\t')
@@ -203,6 +207,8 @@ if __name__ == "__main__":
                                                 is_added = controller.add_device(device_name, selected_room, "smart_coffee_maker")
                                             elif selected_device == "8":
                                                 is_added = controller.add_device(device_name, selected_room, "cleaning_robot")
+                                            elif selected_device == "9":
+                                                is_added = controller.add_device(device_name, selected_room, "smoke_detector")
                                             if not is_added:
                                                 print("Name already taken")
                                         break
