@@ -43,12 +43,15 @@ class SmartHomeSystem:
             "date": now,
             "data": message["data"]
         }] + self.__reports
-        if type(message["data"]) != int:
-            if "alarm" in message["data"].keys():
-                if message["data"]["alarm"]:
-                    print("***")
-                    print("Hazardous level of smoke detected by {}. Please open your window".format(message["device"]))
-                    input("Enter any key to continue...")
+        try:
+            if type(message["data"]) != int:
+                if "alarm" in message["data"].keys():
+                    if message["data"]["alarm"]:
+                        print("***")
+                        print("Hazardous level of smoke detected by {}. Please open your window".format(message["device"]))
+                        input("Enter any key to continue...")
+        except:
+            pass
         # print(message)
 
     def change_active_role(self, role):

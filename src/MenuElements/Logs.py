@@ -45,8 +45,11 @@ def logs_menu(controller_t: SmartHomeSystem):
                 for index in range(len(ls)):
                     room_name = list(ls[index].keys())[0]
                     print(f'{room_name}:')
-                    for device in ls[index][room_name]:
-                        print(f'{room_name}/{device}')
+                    try:
+                        for device in ls[index][room_name]:
+                            print(f'{room_name}/{device}')
+                    except:
+                        pass
                     print()
             else:
                 print("No devices added yet")

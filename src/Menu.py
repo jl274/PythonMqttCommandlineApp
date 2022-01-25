@@ -246,8 +246,8 @@ if __name__ == "__main__":
 
                 else:
                     print("Invalid option")
-        except Exception:
-            pass
+        # except Exception:
+        #     pass
         except KeyboardInterrupt:
             break
         finally:
